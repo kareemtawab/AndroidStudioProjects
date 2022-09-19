@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int x;
+        int z = 8;
+        z = x + 5;
+
         TextView nameF = findViewById(R.id.namefield);
         Button TopB = findViewById(R.id.screen1_button);
         Button BotB = findViewById(R.id.screen2_button);

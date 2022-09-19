@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="213dp"
+            android:maxHeight="213dp"
+            android:tintMode="multiply"
+            android:src="@drawable/login"
+
+            app:tint="@color/purple_200" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:text="HELLO!"
+            android:textColor="@color/purple_500"
+            android:textAlignment="center"
+            android:textSize="80sp"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:text="Sign in with your account"
+            android:textColor="@color/purple_500"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:translationY="-20sp"
+            android:layout_marginBottom="10sp"
+            />
+
+       <EditText
+            android:id="@+id/inputUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:textAlignment="center"
+            android:height="50sp"
+            android:layout_marginStart="25sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <EditText
+            android:id="@+id/inputPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textAlignment="center"
+            android:height="50sp"
+            android:layout_marginStart="25sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginStart="25sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
