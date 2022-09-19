@@ -2,6 +2,8 @@ package com.example.e6;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +20,13 @@ public class Screen2 extends AppCompatActivity {
         backB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in2 = new Intent(Screen2.this, MainActivity.class);
-                startActivity(in2);
+                new AlertDialog.Builder(Screen2.this).setTitle("Confirmation").setMessage("Do you want to go to the main screen?").setPositiveButton("Approve", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent in2 = new Intent(Screen2.this, MainActivity.class);
+                        startActivity(in2);
+                    }
+                }).setNegativeButton("Deny", null).show();
             }
         });
     }

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class Screen1 extends AppCompatActivity {
 
     @Override
@@ -19,6 +21,13 @@ public class Screen1 extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         TextView nameF = findViewById(R.id.nametext);
         nameF.setText(name);
+
+        Snackbar.make(findViewById(R.id.backtohome1), "Dismiss Me First!     >>>>", Snackbar.LENGTH_INDEFINITE).setAction("Dismiss", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        }).show();
 
         backB1.setOnClickListener(new View.OnClickListener() {
             @Override
