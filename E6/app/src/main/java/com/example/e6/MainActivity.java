@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    String name = "UNDEFINED";
+    String name = "UNDEFINED!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
