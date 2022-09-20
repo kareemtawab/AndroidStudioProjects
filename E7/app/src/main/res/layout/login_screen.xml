@@ -15,10 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="213dp"
             android:maxHeight="213dp"
-            android:tintMode="multiply"
             android:src="@drawable/login"
+            android:tintMode="multiply"
 
             app:tint="@color/purple_200" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
