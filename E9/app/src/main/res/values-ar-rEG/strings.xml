@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">الحساب</string>
+    <string name="favorites">المفضلة</string>
+    <string name="settings">الاعدادات</string>
+    <string name="cart">العربة</string>
+    <string name="logout">الخروج</string>
+    <string name="fragment_1">الصفحة الاولى</string>
+    <string name="fragment_2">الصفحة الثانية</string>
+    <string name="fragment_3">الصفحة الثالثة</string>
+</resources>
