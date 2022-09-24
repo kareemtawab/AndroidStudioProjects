@@ -52,15 +52,9 @@ public class FavoritesFragment extends Fragment implements NoteInterface {
 
     @Override
     public void onFavClick(Notes a) {
-        if(!a.isFav()){
-            Toast.makeText(getActivity(), "Hearted", Toast.LENGTH_SHORT).show();
-            updateNoteFav(a, true);
-        }
-        else{
-            Toast.makeText(getActivity(), "Un-Hearted", Toast.LENGTH_SHORT).show();
-            updateNoteFav(a, false);
-        }
-
+        Toast.makeText(getActivity(), "Un-Hearted", Toast.LENGTH_SHORT).show();
+        updateNoteFav(a, false);
+        readDB();
     }
 
     private void readDB() {
@@ -68,7 +62,7 @@ public class FavoritesFragment extends Fragment implements NoteInterface {
             @Override
             public void run() {
                 n = NoteDB.getInstance(getActivity());
-                favoriteFragList = n.getNoteDao().getAllNotes();
+                favoriteFragList = n.getNoteDao().getOnlyFav();
                 NoteAdapter na = new NoteAdapter(favoriteFragList, FavoritesFragment.this);
 
                 getActivity().runOnUiThread(new Runnable() {

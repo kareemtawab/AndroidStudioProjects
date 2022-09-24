@@ -14,4 +14,7 @@ public interface NoteDAO {
 
     @Query("select * from notes_table")
     List<Notes> getAllNotes();
+
+    @Query("select * from notes_table where isFav")
+    List<Notes> getOnlyFav();
 }

@@ -33,7 +33,7 @@ public class EditProfileActivity extends AppCompatActivity {
         phoneTF = findViewById(R.id.newphonefield);
 
         SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
-        passwordTF.getEditText().setText(preferences.getString("sp-password", "data not found"));
+        //passwordTF.getEditText().setText(preferences.getString("sp-password", "data not found"));
         phoneTF.getEditText().setText(preferences.getString("sp-phone", "data not found"));
 
         Button confirmBtn = findViewById(R.id.confirmbutton);
@@ -71,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 in.putExtra("input_password", "");
                                 in.putExtra("input_phone", "");
                                 startActivity(in);
-                                finish();
+                                finishAffinity();
                             }
                         }).setNegativeButton("No", null)
                         .show();
