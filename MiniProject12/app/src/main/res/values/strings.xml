@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Note-worthy!</string>
+    <string name="enter_text_here">Enter text here</string>
+    <string name="save_note">Save note</string>
+    <string name="new_password">New Password</string>
+    <string name="new_phone_number">New Phone Number</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_account_data">Delete Account Data</string>
+    <string name="password">Password</string>
+    <string name="who_are_you">Who are you?</string>
+    <string name="login_with_your_credentials">Register with your credentials</string>
+    <string name="username">Username</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="register">Register</string>
+    <string name="custom_header">Custom Header</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="favorite">Favorite</string>
+
+    <string name="java">Java</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="python">Python</string>
+    <string name="c_sharp">C#</string>
+    <string name="c_plus_plus">C++</string>
+    <string name="c">C</string>
+    <string name="assembly">Assembly</string>
+    <string name="custom">* Custom *</string>
+
+</resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
+    tools:context=".EditProfileActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bkg"
+        />
+
+    <ImageView
+        android:id="@+id/accpic"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:src="@drawable/accountillustration"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30sp"
+        android:layout_marginBottom="30sp"
+        android:elevation="30sp"
+
+        />
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:src="@drawable/edit"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="30sp"
+        android:layout_marginBottom="30sp"
+        android:layout_above="@+id/newpasswordfield"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newpasswordfield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        android:textColorHint="@color/black"
+        app:errorTextColor="@color/black"
+        app:boxBackgroundColor="@color/white"
+        android:hint="@string/new_password"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_below="@id/accpic"
+        android:inputType="textPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newphonefield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        android:textColorHint="@color/black"
+        app:errorTextColor="@color/black"
+        app:boxBackgroundColor="@color/white"
+        android:hint="@string/new_phone_number"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_below="@id/newpasswordfield"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/confirmbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:layout_marginTop="15sp"
+        android:layout_marginStart="45sp"
+        android:layout_marginEnd="45sp"
+        android:layout_below="@id/newphonefield"
+        />
+   <Button
+        android:id="@+id/deleteaccountbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_account_data"
+        android:layout_marginTop="15sp"
+        android:layout_marginStart="45sp"
+        android:layout_marginEnd="45sp"
+        android:layout_below="@id/confirmbutton"
+        />
+
+</RelativeLayout>

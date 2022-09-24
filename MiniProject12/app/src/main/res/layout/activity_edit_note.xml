@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
+    tools:context=".EditNoteActivity">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
+        android:layout_alignParentTop="true"
+        />
+    <TextView
+        android:id="@+id/selectednoteheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textAlignment="textStart"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_below="@id/spinner"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+    </TextView>
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:gravity="top"
+        android:textAlignment="gravity"
+        android:hint="@string/enter_text_here"
+        android:layout_above="@+id/savenotebutton"
+        android:layout_below="@+id/selectednoteheader"
+        />
+    <Button
+        android:id="@+id/savenotebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_note"
+        android:layout_marginStart="45sp"
+        android:layout_marginEnd="45sp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
