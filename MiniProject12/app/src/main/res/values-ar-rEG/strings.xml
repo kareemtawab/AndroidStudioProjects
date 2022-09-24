@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Note-worthy!</string>
+    <string name="enter_text_here">اكتب هنا</string>
+    <string name="save_note">تسجيل المذكرة</string>
+    <string name="new_password">رقم سري جديد</string>
+    <string name="new_phone_number">رقم جوال جديد</string>
+    <string name="confirm">تأكيد</string>
+    <string name="delete_account_data">مسح بيانات الحساب</string>
+    <string name="password">رقم سري</string>
+    <string name="who_are_you">أبلغنا عنك</string>
+    <string name="login_with_your_credentials">سجل ببيانات حسابك</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="phone_number">رقم جوال</string>
+    <string name="register">تسجيل</string>
+    <string name="custom_header">عنوان جديد</string>
+    <string name="edit_details">تعديل البيانات</string>
+    <string name="home">الرئيسية</string>
+    <string name="profile">الحساب</string>
+    <string name="favorite">المفضلة</string>
+
+    <string name="java">Java</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="python">Python</string>
+    <string name="c_sharp">C#</string>
+    <string name="c_plus_plus">C++</string>
+    <string name="c">C</string>
+    <string name="assembly">Assembly</string>
+    <string name="custom">* اخرى *</string>
+
+</resources>

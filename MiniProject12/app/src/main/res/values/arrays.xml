@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_text" >
+        <item>@string/java</item>
+        <item>@string/kotlin</item>
+        <item>@string/python</item>
+        <item>@string/c_sharp</item>
+        <item>@string/c_plus_plus</item>
+        <item>@string/c</item>
+        <item>@string/assembly</item>
+        <item>@string/custom</item>
+    </string-array>
+</resources>
