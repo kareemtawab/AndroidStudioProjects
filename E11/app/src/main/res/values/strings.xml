@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">E11</string>
+    <string name="ioexception_location">IOException: Location not found</string>
+</resources>

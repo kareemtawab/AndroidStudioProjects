@@ -1,0 +1,145 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.kareem.e11"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:5:5-66
+11-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:6:5-78
+12-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:7:5-80
+13-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:7:22-78
+14
+15    <!-- Include required permissions for Google Maps API to run. -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:23:5-79
+16-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:23:22-76
+17
+18    <uses-feature
+18-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:26:5-28:35
+19        android:glEsVersion="0x00020000"
+19-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:27:9-41
+20        android:required="true" />
+20-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:28:9-32
+21
+22    <queries>
+22-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:30:5-34:15
+23
+24        <!-- Needs to be explicitly declared on Android R+ -->
+25        <package android:name="com.google.android.apps.maps" />
+25-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:33:9-64
+25-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:33:18-61
+26    </queries>
+27
+28    <application
+28-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:9:5-37:19
+29        android:allowBackup="true"
+29-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:10:9-35
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.8.0] C:\Users\Kareem\.gradle\caches\transforms-3\28a1708219c3158e49b329d141e5cfff\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+31        android:dataExtractionRules="@xml/data_extraction_rules"
+31-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:11:9-65
+32        android:debuggable="true"
+33        android:extractNativeLibs="false"
+34        android:fullBackupContent="@xml/backup_rules"
+34-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:12:9-54
+35        android:icon="@mipmap/ic_launcher"
+35-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:13:9-43
+36        android:label="@string/app_name"
+36-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:14:9-41
+37        android:roundIcon="@mipmap/ic_launcher_round"
+37-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:15:9-54
+38        android:supportsRtl="true"
+38-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:16:9-35
+39        android:testOnly="true"
+40        android:theme="@style/Theme.E11" >
+40-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:17:9-41
+41        <activity
+41-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:19:9-31:20
+42            android:name="com.kareem.e11.MainActivity"
+42-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:20:13-41
+43            android:exported="true" >
+43-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:21:13-36
+44            <intent-filter>
+44-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:22:13-26:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:23:17-69
+45-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:23:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:25:17-77
+47-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:25:27-74
+48            </intent-filter>
+49
+50            <meta-data
+50-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:28:13-30:36
+51                android:name="android.app.lib_name"
+51-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:29:17-52
+52                android:value="" />
+52-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:30:17-33
+53        </activity>
+54
+55        <meta-data
+55-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:33:9-36:15
+56            android:name="com.google.android.geo.API_KEY"
+56-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:34:13-58
+57            android:value="AIzaSyBkh3lPeCk7OMirRfMZHSkx494Yk7aVyZM" />
+57-->C:\Users\Kareem\AndroidStudioProjects\E11\app\src\main\AndroidManifest.xml:35:13-68
+58        <!-- Needs to be explicitly declared on P+ -->
+59        <uses-library
+59-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
+60            android:name="org.apache.http.legacy"
+60-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+61            android:required="false" />
+61-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\Kareem\.gradle\caches\transforms-3\89141f18bed73e7795f4f97e75014895\transformed\play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
+62
+63        <activity
+63-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Kareem\.gradle\caches\transforms-3\fb5a38ad8e3f436adf4a77ea6a97bd32\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+64            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+64-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Kareem\.gradle\caches\transforms-3\fb5a38ad8e3f436adf4a77ea6a97bd32\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+65            android:exported="false"
+65-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Kareem\.gradle\caches\transforms-3\fb5a38ad8e3f436adf4a77ea6a97bd32\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+66            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+66-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Kareem\.gradle\caches\transforms-3\fb5a38ad8e3f436adf4a77ea6a97bd32\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+67
+68        <meta-data
+68-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Kareem\.gradle\caches\transforms-3\3aafdad968ac299ac87aadc0dcde6271\transformed\play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+69            android:name="com.google.android.gms.version"
+69-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Kareem\.gradle\caches\transforms-3\3aafdad968ac299ac87aadc0dcde6271\transformed\play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+70            android:value="@integer/google_play_services_version" />
+70-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Kareem\.gradle\caches\transforms-3\3aafdad968ac299ac87aadc0dcde6271\transformed\play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+71
+72        <provider
+72-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+73            android:name="androidx.startup.InitializationProvider"
+73-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+74            android:authorities="com.kareem.e11.androidx-startup"
+74-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+75            android:exported="false" >
+75-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+76            <meta-data
+76-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+77                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+77-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+78                android:value="androidx.startup" />
+78-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Kareem\.gradle\caches\transforms-3\ec6e2ba61c9a42dd8e0aa44ee71f9dfb\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+79            <meta-data
+79-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Kareem\.gradle\caches\transforms-3\371d4428813d11175307b9e72a350208\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+80                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+80-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Kareem\.gradle\caches\transforms-3\371d4428813d11175307b9e72a350208\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+81                android:value="androidx.startup" />
+81-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Kareem\.gradle\caches\transforms-3\371d4428813d11175307b9e72a350208\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+82        </provider>
+83    </application>
+84
+85</manifest>
