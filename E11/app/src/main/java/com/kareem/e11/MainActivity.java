@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleMap map;
     double lat;
     double lng;
+    GoogleMap gmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 5));
+                gmap = googleMap;
+                //googleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+                //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 5));
             }
         });
     }
@@ -140,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             Location currentLocation = locationResult.getLastLocation();
             lat = currentLocation.getLatitude();
             lng = currentLocation.getLongitude();
+            gmap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+            gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 14));
             latlngTV.setText(String.valueOf(lat) + " E       " + String.valueOf(lng) + " N");
             addressTV.setText(getAddress(lat, lng));
         }
