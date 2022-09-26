@@ -62,11 +62,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     private String getAddress(double lat, double lng) {
         String a = null;
         try {
@@ -150,4 +145,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
 }
