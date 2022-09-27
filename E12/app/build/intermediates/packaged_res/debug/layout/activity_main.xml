@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bkg"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/emailfield"
+        />
+
+    <EditText
+        android:id="@+id/emailfield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter email"
+        android:layout_margin="10sp"
+        android:layout_above="@id/jobfield"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+
+    <EditText
+        android:id="@+id/jobfield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:hint="Enter job"
+        android:layout_above="@id/officefield"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+    <EditText
+        android:id="@+id/officefield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:hint="Enter office"
+        android:layout_above="@id/scorefield"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+    <EditText
+        android:id="@+id/scorefield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:hint="Enter score"
+        android:layout_above="@id/usernamefield"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+    <EditText
+        android:id="@+id/usernamefield"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:hint="Enter username"
+        android:layout_above="@id/addnew"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+
+    <Button
+        android:id="@+id/addnew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:text="ADD USER"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

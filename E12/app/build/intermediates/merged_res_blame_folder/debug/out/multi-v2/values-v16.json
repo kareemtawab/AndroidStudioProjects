@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.kareem.e12.app-mergeDebugResources-32:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kareem\\.gradle\\caches\\transforms-3\\a3aef3274c222e47595fbfeb9137a19e\\transformed\\core-1.8.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kareem\\.gradle\\caches\\transforms-3\\ea4fb2c479fb388b06192e19e8a38269\\transformed\\appcompat-1.5.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}
