@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "858386993480",
+    "project_id": "e12-for-amit",
+    "storage_bucket": "e12-for-amit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858386993480:android:2eadf53a58e9253e49237d",
+        "android_client_info": {
+          "package_name": "com.kareem.e12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858386993480-6k8efrhf41d1dgfuebdp06ndonfido08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjMcv-RwQzkKoH-zeGCj7rz4T-gn_A22E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858386993480-6k8efrhf41d1dgfuebdp06ndonfido08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
