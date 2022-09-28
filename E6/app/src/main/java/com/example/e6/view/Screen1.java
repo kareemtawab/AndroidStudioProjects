@@ -1,4 +1,4 @@
-package com.example.e6;
+package com.example.e6.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.e6.MainActivity;
+import com.example.e6.R;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Screen1 extends AppCompatActivity {
