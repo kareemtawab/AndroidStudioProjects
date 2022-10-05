@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "835424068984",
+    "project_id": "martzilla-for-amit",
+    "storage_bucket": "martzilla-for-amit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835424068984:android:0995013620b713bfe3148d",
+        "android_client_info": {
+          "package_name": "com.kareem.martzilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835424068984-rrekds9644g9io03vonptuidr3153e0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0U3cmjP3YspDqWqcs3665qZvlks413JA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835424068984-rrekds9644g9io03vonptuidr3153e0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

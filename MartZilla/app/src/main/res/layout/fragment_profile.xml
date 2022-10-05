@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.CartFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/fragmenttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Profile"
+            android:textColor="@color/orangedark"
+            android:fontFamily="@font/intertight_bold"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topbar"
+            android:layout_below="@id/fragmenttitle"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilepic"
+                android:layout_width="120sp"
+                android:layout_height="120sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
+                android:elevation="15sp"
+                android:src="@drawable/profilepic"
+                app:civ_border_color="@color/orangedark"
+                app:civ_border_width="2sp"
+                app:civ_circle_background_color="@color/black" />
+            <LinearLayout
+                android:id="@+id/profiledata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/profilepic"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sandra James"
+                    android:textColor="@color/orangedark"
+                    android:fontFamily="@font/intertight_bold"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    />
+                <TextView
+                    android:id="@+id/emailaddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Address"
+                    android:fontFamily="@font/intertight_bold"
+                    android:textColor="@color/orangedark"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:id="@+id/phonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number"
+                    android:fontFamily="@font/intertight_bold"
+                    android:textColor="@color/orangedark"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/editbutton"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:tint="@color/orangedark" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profileRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/logoutbutton"
+            android:layout_below="@id/topbar"
+            />
+
+        <Button
+            android:id="@+id/logoutbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25sp"
+            android:layout_marginTop="25sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginBottom="5sp"
+            android:text="Log Out"
+            android:fontFamily="@font/intertight_bold"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+</FrameLayout>

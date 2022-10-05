@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.CartFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/fragmenttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Cart"
+            android:fontFamily="@font/intertight_bold"
+            android:textColor="@color/orangedark"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/checkoutbutton"
+            android:layout_below="@id/fragmenttitle"
+            />
+
+        <Button
+            android:id="@+id/checkoutbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25sp"
+            android:layout_marginTop="25sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginBottom="5sp"
+            android:text="Proceed to Checkout"
+            android:fontFamily="@font/intertight_bold"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+</FrameLayout>

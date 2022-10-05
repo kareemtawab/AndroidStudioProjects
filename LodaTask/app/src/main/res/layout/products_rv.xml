@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/global"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25sp"
+        android:elevation="0sp"
+        android:layout_margin="15sp"
+        android:padding="10sp"
+        app:cardBackgroundColor="@color/white"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/productimage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_centerHorizontal="true"
+                android:elevation="15sp"
+                android:src="@drawable/err"
+                 />
+
+            <LinearLayout
+                android:id="@+id/productdata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="15sp"
+                android:layout_marginBottom="15sp"
+                android:layout_below="@+id/productimage"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/productname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Product Name"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="-10sp"
+                    />
+
+                <TextView
+                    android:id="@+id/productcategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category Name"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="-5sp"
+                    />
+                <TextView
+                    android:id="@+id/productprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    />
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/favoritebuttoncircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="20sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/productdata"
+                android:layout_marginBottom="10sp"
+                android:layout_marginEnd="15sp"
+                >
+                <ImageView
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_circle_24"
+                    />
+                <ImageView
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_favorite_24"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

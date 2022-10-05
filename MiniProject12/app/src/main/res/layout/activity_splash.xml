@@ -18,8 +18,8 @@
         android:id="@+id/notepad_anim"
         android:layout_width="match_parent"
         android:layout_height="550sp"
-        app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/notepadanimation"
+        app:lottie_autoPlay="true"
         app:lottie_loop="false"
         app:lottie_speed="0.7"
         />

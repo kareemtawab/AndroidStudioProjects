@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.MoreUserDataActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bkg"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/topbanner1"
+        android:scaleType="fitStart"
+        />
+    <LinearLayout
+        android:id="@+id/martzillabrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40sp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageView
+            android:id="@+id/martzillabrandlogo"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:src="@drawable/avocado"
+            android:scaleType="centerCrop"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Martzilla"
+                android:textColor="@color/orangedark"
+                android:fontFamily="@font/intertight_bold"
+                android:textSize="40sp"
+                />
+            <ImageView
+                android:layout_width="150sp"
+                android:layout_height="50sp"
+                android:src="@drawable/underline"
+                app:tint="@color/orangedark"
+                android:layout_marginTop="-25sp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/telluswhereyouare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tell us where you are!"
+        android:fontFamily="@font/intertight_bold"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/orangedark"
+        android:layout_below="@id/martzillabrand"
+        />
+    <TextView
+        android:id="@+id/markyourlocationonthemap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark your location on the map"
+        android:fontFamily="@font/intertight_bold"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:textColor="@color/greydark"
+        android:layout_below="@id/telluswhereyouare"
+        />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomlayout"
+        android:layout_below="@+id/markyourlocationonthemap"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="10sp"
+        >
+
+    </com.google.android.gms.maps.MapView>
+
+    <LinearLayout
+        android:id="@+id/bottomlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/savebutton"
+        >
+        <TextView
+            android:id="@+id/orenteryouraddresshere"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="or enter your address here"
+            android:fontFamily="@font/intertight_bold"
+            android:textSize="15sp"
+            android:textColor="@color/greydark"
+            android:textAlignment="center"
+            />
+        <EditText
+            android:id="@+id/editText_customaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Custom Address"
+            android:inputType="textPostalAddress"
+            android:fontFamily="@font/intertight_semibold"
+            android:textColor="@color/orangedark"
+            android:textColorHint="@color/greylight"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            />
+       <EditText
+           android:id="@+id/editText_phonenumber"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Phone number"
+           android:inputType="phone"
+           android:fontFamily="@font/intertight_semibold"
+           android:textColor="@color/orangedark"
+           android:textColorHint="@color/greylight"
+           android:layout_marginStart="15sp"
+           android:layout_marginEnd="15sp"
+           />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/savebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="25sp"
+        android:layout_marginEnd="25sp"
+        android:layout_marginBottom="25sp"
+        android:text="Save"
+        android:fontFamily="@font/intertight_bold"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_wave"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        app:tint="@color/orangedark"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        />
+
+</RelativeLayout>

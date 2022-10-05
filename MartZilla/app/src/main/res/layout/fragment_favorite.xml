@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.CartFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/fragmenttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Saved"
+            android:fontFamily="@font/intertight_bold"
+            android:textColor="@color/orangedark"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragmenttitle"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.OrderAcceptedActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bkg"
+        android:scaleType="centerCrop"
+        />
+
+    <RelativeLayout
+        android:id="@+id/martzillabrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        >
+        <ImageView
+            android:id="@+id/martzillabrandlogo"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:src="@drawable/avocado"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/tickanimation"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        app:lottie_rawRes="@raw/greentick"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_speed="0.7"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/martzillabrand"
+        />
+
+    <TextView
+        android:id="@+id/yourorderhasbeensent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your order has\nbeen sent!"
+        android:fontFamily="@font/intertight_bold"
+        android:textColor="@color/orangedark"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        android:lineSpacingMultiplier="0.7"
+        android:layout_marginBottom="-20sp"
+        android:layout_below="@id/tickanimation"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/yourorderhasbeensent"
+        android:layout_marginStart="15sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="15sp"
+        android:layout_marginBottom="15sp"
+        android:text="Your order is being processed\nand will shipped soon!"
+        android:fontFamily="@font/intertight_bold"
+        android:textAlignment="center"
+        android:textColor="@color/greydark"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/backtohome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:fontFamily="@font/intertight_bold"
+        android:textColor="@color/black"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25sp"
+        android:layout_marginEnd="25sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="25sp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_wave"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        app:tint="@color/orangedark"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        />
+</RelativeLayout>

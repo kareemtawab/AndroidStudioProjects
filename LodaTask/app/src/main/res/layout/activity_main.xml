@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.MainActivity"
+    android:background="@color/grey_dark"
+    android:orientation="vertical"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:elevation="10sp"
+        app:cardBackgroundColor="@color/grey"
+        app:cardCornerRadius="30sp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/toplayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
+                android:elevation="10sp">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                    app:tint="@color/grey_dark" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/pic"
+                    android:layout_toEndOf="@id/back"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Search Product"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="25sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/pic"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="15sp">
+
+                    <ImageView
+                        android:layout_width="50sp"
+                        android:layout_height="50sp"
+                        android:src="@drawable/profile_pic" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bottomlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toplayout"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/searchbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50sp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginEnd="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_toStartOf="@+id/settings"
+                    app:cardCornerRadius="15sp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:id="@+id/search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40sp"
+                            android:layout_marginStart="20sp"
+                            android:src="@drawable/ic_baseline_search_24"
+                            android:layout_centerVertical="true"
+                            />
+                        <TextView
+                            android:id="@+id/rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Electronics"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:layout_marginStart="10sp"
+                            android:layout_toEndOf="@id/search"
+                            android:layout_centerVertical="true"
+                            />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/settings"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="5sp"
+                    app:cardCornerRadius="15sp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <ImageView
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/sliders" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:layout_below="@id/bottomlayout"
+                    />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

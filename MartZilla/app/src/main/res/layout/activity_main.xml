@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bkg"
+        android:scaleType="centerCrop"
+        />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_graph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomnavlayout"
+        android:layout_below="@+id/martzillabrand"
+        tools:layout="@layout/fragment_home"
+        />
+
+    <RelativeLayout
+        android:id="@+id/martzillabrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="15sp"
+        android:layout_marginBottom="5sp">
+
+        <ImageView
+            android:id="@+id/logoutbutton"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_logout_24"
+            app:tint="@color/orangedark" />
+
+        <ImageView
+            android:id="@+id/martzillabrandlogo"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avocado" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/martzillabrandlogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/martzillabrandlogo"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/intertight_bold"
+                android:text="Deliver to: "
+                android:textColor="@color/orangedark"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intertight_bold"
+                android:text="Location"
+                android:textColor="@color/orangedark"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottomnavlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="15sp"
+        android:alpha="0.9"
+        app:cardCornerRadius="25sp"
+        android:layout_marginStart="15sp"
+        android:layout_marginEnd="15sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="5sp"
+        app:cardBackgroundColor="@color/white"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="70sp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/transparent_rectangle"
+            android:fontFamily="@font/intertight_bold"
+            app:menu="@menu/bottomnav_menu"
+            app:itemIconTint="@color/bottom_nav_item_color"
+            app:itemTextColor="@color/bottom_nav_item_color"
+            android:focusable="false"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_wave"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        app:tint="@color/orangedark"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="15sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        />
+</RelativeLayout>

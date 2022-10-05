@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MartZilla" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
+        <item name="android:navigationBarColor">@color/orangedark</item>
+        <item name="colorPrimary">@color/orangelight</item>
+        <item name="colorPrimaryVariant">@color/orangedark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/greylight</item>
+        <item name="colorSecondaryVariant">@color/greydark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+</resources>
