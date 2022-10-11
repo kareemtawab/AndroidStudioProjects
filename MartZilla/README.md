@@ -1,12 +1,12 @@
 # MartZilla Project Insights
 <img src="https://user-images.githubusercontent.com/24245215/195145257-66878426-7687-4025-ada2-414ce3406aa5.png" width="200">
-(an E-Commerce Market Application by Kareem A. Tawab)  
+####(an E-Commerce Market Application by Kareem A. Tawab)  
 
 This project idea was kindly provided and supervised on by **AMIT and Orange™ Digital Center** during the online "Java + Android" course. It comprises of a simple application that provides an imagination of how an e-commerce application can be effective in upscaling the users' experience and uplifting a company's goals while being provided in an eye-popping look. The story behind its name came from the words "mart" that denotes an online shop and "zilla" that comes from the 1954 movie of _Godzilla_ where it implies some form of excess and mightiness. So, it had to be named **MartZilla**.
 
-**List of used activities and fragments:**
+##List of used activities and fragments:
 
-- Activities:
+###Activities:
 
 1. Splash
 2. Get Started
@@ -18,14 +18,14 @@ This project idea was kindly provided and supervised on by **AMIT and Orange™ 
 8. Order Submission Failure
 9. Product Details
  |
-- Fragments:
+###Fragments:
 
 1. Home
 2. Saved
 3. Cart
 4. Account
 
-**Used services and libraries:**
+##Used services and libraries:
 
 - Retrofit – for accessing the API
 - Room – for creating a local copy of the API in an offline database along with some aiding information
@@ -35,7 +35,7 @@ This project idea was kindly provided and supervised on by **AMIT and Orange™ 
 - Lottie – for the integration of animated json images
 - Google Play Services – for the implementation of Google maps
 
-**Application roadmap:**  
+##Application roadmap:
 
 1. At the _splash_ screen "MartZilla" connects to the designated API and dumps its fields and entities in an offline local database. A Firebase connection is also being initiated to get the current logged in user data. If it resides, the process heads over to the home page otherwise greats the user with _get started_ page to initiate _logging in_ or _registration_ from there on. After the user has entered their new credentials, they are prompted to accept an automatic navigation to his _account details page_ to update their location and phone number. After which the user is ready to make orders.
 2. From the home page, a user can browse offers, have a look at the categories and add items to the saved and cart pages. Tapping on an item will open a page of in-depth details of that item. There, they can add any count of the item to the cart.
@@ -44,7 +44,7 @@ This project idea was kindly provided and supervised on by **AMIT and Orange™ 
 5. From the account page, the user can edit their location and phone number, reset their account password and even delete their account if they feel necessary. Every action of these will prompt the user to accept some terms.
 6. Logging out is made easy using an icon that is available in the main activity or using the dedicated button in the account page.
 
-**Screenshots:**  
+##Screenshots:
 
 <img src="https://user-images.githubusercontent.com/24245215/195138021-f5b159de-6736-4c5b-aae8-244e1f4ca800.jpg" width="200"> <img src="https://user-images.githubusercontent.com/24245215/195138044-af920171-dd64-4a32-a30a-bc06c072e3f5.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195143116-8def51db-4a05-417a-be82-b63245543df4.jpg" width="200">
