@@ -9,13 +9,16 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.kareem.martzilla.R;
 import com.kareem.martzilla.model.products_db.Products;
 import com.kareem.martzilla.model.products_db.ProductsDB;
 import com.kareem.martzilla.model.products_rf.ProductsRFCallback;
-import com.kareem.martzilla.model.products_rf.ProductsAPIInterface;
 import com.kareem.martzilla.model.products_rf.ProductsRFInterface;
+import com.kareem.martzilla.model.user_data.SharedPreferences;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SplashActivity extends AppCompatActivity implements ProductsRFInterface {
@@ -37,6 +40,10 @@ public class SplashActivity extends AppCompatActivity implements ProductsRFInter
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null) {
                     isUserSigned = true;
+                    SharedPreferences sharedPreferences = new SharedPreferences();
+                    sharedPreferences.getInstance(SplashActivity.this);
+                    sharedPreferences.saveEmail(firebaseAuth.getCurrentUser().getEmail());
+                    sharedPreferences.saveName(firebaseAuth.getCurrentUser().getDisplayName());
                 }
             }
         };
@@ -45,7 +52,7 @@ public class SplashActivity extends AppCompatActivity implements ProductsRFInter
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                callback.getAllProducts();
+                callback.connectToAPI();
                 if(isUserSigned) {
                     Toast.makeText(SplashActivity.this, "Already logged in", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -54,7 +61,7 @@ public class SplashActivity extends AppCompatActivity implements ProductsRFInter
                 }
                 finish();
             }
-        }, 1000);
+        }, 4000);
 
     }
 

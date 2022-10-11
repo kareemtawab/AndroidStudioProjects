@@ -119,6 +119,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/subtotalprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -146,6 +147,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/totalprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -170,7 +172,7 @@
                         android:layout_marginBottom="15sp"
                         android:text="Back"
                         android:fontFamily="@font/intertight_bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         />
                     <Button
                         android:id="@+id/okbutton"
@@ -181,7 +183,7 @@
                         android:layout_marginBottom="15sp"
                         android:text="Checkout!"
                         android:fontFamily="@font/intertight_bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:layout_toRightOf="@id/backbutton"
                         />
                 </RelativeLayout>

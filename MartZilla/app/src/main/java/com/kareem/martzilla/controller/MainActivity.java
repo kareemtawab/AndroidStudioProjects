@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kareem.martzilla.R;
+import com.kareem.martzilla.model.user_data.SharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     CartFragment cartFragment = new CartFragment();
     ProfileFragment profileFragment = new ProfileFragment();
     ImageView logoutBtn;
+    TextView loactionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null)
             this.getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
+        loactionTV = findViewById(R.id.location);
+        SharedPreferences sharedPreferences = new SharedPreferences();
+        sharedPreferences.getInstance(this);
+        loactionTV.setText(sharedPreferences.getAddress());
 
         logoutBtn = findViewById(R.id.logoutbutton);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseAuth.getInstance().signOut();
+
                         Intent in = new Intent(MainActivity.this, GetStartedActivity.class);
                         startActivity(in);
                         finishAffinity();
@@ -47,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
                 }).setNegativeButton("No", null).show();
             }
         });
+
+        try {
+            String frag = getIntent().getExtras().getString("frag");
+            switch(frag){
+                case "profile":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, profileFragment).commit();
+                    break;
+            }
+        }
+        catch (Exception e){
+
+        }
 
         bottom_nav = findViewById(R.id.bottomNav);
         bottom_nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -70,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = new SharedPreferences();
+        sharedPreferences.getInstance(this);
+        loactionTV.setText(sharedPreferences.getAddress());
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,9 +26,92 @@
             android:id="@+id/cartRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/checkoutbutton"
+            android:layout_above="@id/subtotal"
             android:layout_below="@id/fragmenttitle"
             />
+
+        <LinearLayout
+            android:id="@+id/subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_above="@id/checkoutbutton"
+            android:layout_marginEnd="25sp"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal:"
+                android:fontFamily="@font/intertight_bold"
+                android:textColor="@color/orangedark"
+                android:textSize="15sp"
+                android:layout_marginEnd="5sp"
+                android:layout_gravity="end"
+                />
+
+            <TextView
+                android:id="@+id/subtotalprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$0.99"
+                android:fontFamily="@font/intertight_bold"
+                android:textColor="@color/orangedark"
+                android:textSize="20sp"
+                android:textAlignment="textEnd"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/cartisempty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <ImageView
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/emptycart"
+                android:translationX="-20sp"
+                app:tint="@color/orangelight" />
+
+            <TextView
+                android:id="@+id/yourorderhasbeensent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tickanimation"
+                android:layout_marginBottom="-20sp"
+                android:fontFamily="@font/intertight_bold"
+                android:lineSpacingMultiplier="0.7"
+                android:text="Cart is empty!"
+                android:textAlignment="center"
+                android:textColor="@color/orangedark"
+                android:textSize="50sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yourorderhasbeensent"
+                android:layout_marginStart="15sp"
+                android:layout_marginTop="15sp"
+                android:layout_marginEnd="15sp"
+                android:layout_marginBottom="15sp"
+                android:fontFamily="@font/intertight_bold"
+                android:text="Looks like you do not have anything in\n your cart. Head over to the Home tab to\n continue shopping!"
+                android:textAlignment="center"
+                android:textColor="@color/greydark"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
 
         <Button
             android:id="@+id/checkoutbutton"
@@ -35,11 +119,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="25sp"
-            android:layout_marginTop="25sp"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="25sp"
             android:layout_marginBottom="5sp"
             android:text="Proceed to Checkout"
             android:fontFamily="@font/intertight_bold"
-            android:textColor="@color/black" />
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            />
     </RelativeLayout>
 </FrameLayout>

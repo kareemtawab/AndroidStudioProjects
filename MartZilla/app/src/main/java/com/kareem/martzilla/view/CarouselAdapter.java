@@ -12,12 +12,13 @@ import com.kareem.martzilla.R;
 import com.kareem.martzilla.model.carousel.Carousel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHolder> {
 
-    private ArrayList<Carousel> BannerList;
+    private List<Carousel> BannerList = new ArrayList<>();
 
-    public CarouselAdapter(ArrayList<Carousel> bannerList) {
+    public CarouselAdapter(List<Carousel> bannerList) {
         this.BannerList = bannerList;
     }
 

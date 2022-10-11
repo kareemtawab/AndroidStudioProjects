@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProductsDAO {
 
     // insert products
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addProduct(Products p);
 
     // set save status for single product by id
@@ -23,6 +23,14 @@ public interface ProductsDAO {
     // set cart count for single product by id
     @Query("update products_table set inCartCount = :c where id = :id")
     void setCartCountForSingleProduct(int id, int c);
+
+    // set cart count at zero for all products
+    @Query("update products_table set inCartCount = 0")
+    void setCartCountAtZeroForAllProducts();
+
+    // set unsaved for all products
+    @Query("update products_table set saved = 0")
+    void setUnsavedForAllProducts();
 
 
 
@@ -45,5 +53,11 @@ public interface ProductsDAO {
     // get products that are in cart
     @Query("select * from products_table where inCartCount > 0")
     List<Products> getAllProductsInCart();
+
+
+
+    // get products that are in cart
+    @Query("select sum(price * inCartCount) from products_table where inCartCount > 0")
+    float getSubtotalInCart();
 
 }

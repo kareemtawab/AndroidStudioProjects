@@ -22,7 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductsAdapterSaves extends RecyclerView.Adapter<ProductsAdapterSaves.ViewHolder> {
 
-    private ArrayList<Products> productsList;
+    private List<Products> productsList = new ArrayList<>();
     private ProductItemTapInterface productItemTapInterface;
 
     public ProductsAdapterSaves(List<Products> productsList, ProductItemTapInterface productItemTapInterface) {
@@ -32,12 +32,13 @@ public class ProductsAdapterSaves extends RecyclerView.Adapter<ProductsAdapterSa
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView productImage;
+        ImageView productImage;
         TextView productName;
         TextView productCategory;
         LinearLayout productData;
         ImageView cartIcon;
         ImageView favIcon;
+        TextView price;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +49,7 @@ public class ProductsAdapterSaves extends RecyclerView.Adapter<ProductsAdapterSa
             productData = itemView.findViewById(R.id.productdata);
             cartIcon = itemView.findViewById(R.id.addtocartbutton);
             favIcon = itemView.findViewById(R.id.favoritebutton);
+            price = itemView.findViewById(R.id.productprice);
         }
     }
 
@@ -67,6 +69,8 @@ public class ProductsAdapterSaves extends RecyclerView.Adapter<ProductsAdapterSa
         Glide.with(holder.productImage.getContext())
                 .load(productsList.get(position).getImage())
                 .into(holder.productImage);
+        holder.price.setText(String.format("$%.2f", currentProduct.getPrice()));
+        holder.favIcon.setImageResource(R.drawable.ic_baseline_bookmark_24);
 
         holder.productImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +94,6 @@ public class ProductsAdapterSaves extends RecyclerView.Adapter<ProductsAdapterSa
             @Override
             public void onClick(View view) {
                 productItemTapInterface.favTap(currentProduct);
-//                if (productItemTapInterface.favTap(currentProduct)){
-//                    holder.favIcon.setImageResource(R.drawable.ic_baseline_bookmark_24);
-//                }
-//                else {
-//                    holder.favIcon.setImageResource(R.drawable.ic_baseline_bookmark_border_24);
-//                }
             }
         });
     }

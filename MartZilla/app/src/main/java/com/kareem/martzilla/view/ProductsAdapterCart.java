@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductsAdapterCart extends RecyclerView.Adapter<ProductsAdapterCart.ViewHolder> {
 
-    private ArrayList<Products> productsList;
+    private List<Products> productsList = new ArrayList<>();
     private ProductItemTapInCartInterface productItemTapInCartInterface;
 
     public ProductsAdapterCart(List<Products> productsList, ProductItemTapInCartInterface productItemTapInCartInterface) {
@@ -76,7 +76,12 @@ public class ProductsAdapterCart extends RecyclerView.Adapter<ProductsAdapterCar
         Glide.with(holder.productImage.getContext())
                 .load(productsList.get(position).getImage())
                 .into(holder.productImage);
-
+        holder.productImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productItemTapInCartInterface.imageTap(currentProduct);
+            }
+        });
         holder.productData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.kareem.martzilla.R;
+import com.kareem.martzilla.model.user_data.SharedPreferences;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!edtPass.getText().toString().isEmpty() && !edtEmail.getText().toString().isEmpty()) {
+                if(!edtPass.getText().toString().trim().isEmpty() && !edtEmail.getText().toString().trim().isEmpty()) {
                     progressBar.setVisibility(View.VISIBLE);
                     btnLogin.setEnabled(false);
-                    firebaseAuth.signInWithEmailAndPassword(edtEmail.getText().toString(),
+                    firebaseAuth.signInWithEmailAndPassword(edtEmail.getText().toString().trim(),
                                     edtPass.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -66,6 +67,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                                         if (currentUser != null) {
+
+                                            SharedPreferences sharedPreferences = new SharedPreferences();
+                                            sharedPreferences.getInstance(LoginActivity.this);
+                                            sharedPreferences.saveEmail(currentUser.getEmail());
+                                            sharedPreferences.saveName(currentUser.getDisplayName());
                                             Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             finish();

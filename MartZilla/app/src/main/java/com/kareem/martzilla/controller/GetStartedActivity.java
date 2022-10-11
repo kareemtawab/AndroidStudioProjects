@@ -32,14 +32,14 @@ public class GetStartedActivity extends AppCompatActivity {
             }
         });
 
-        martZillaTest = findViewById(R.id.martzillabrand);
-        martZillaTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(GetStartedActivity.this, MainActivity.class);
-                startActivity(in);
-                finish();
-            }
-        });
+//        martZillaTest = findViewById(R.id.martzillabrand);
+//        martZillaTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent in = new Intent(GetStartedActivity.this, MainActivity.class);
+//                startActivity(in);
+//                finish();
+//            }
+//        });
     }
 }

@@ -20,7 +20,7 @@ public class ProductsRFCallback {
         this.productsRFInterface = productsRFInterface;
     }
 
-    public void getAllProducts() {
+    public void connectToAPI() {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://fakestoreapi.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();

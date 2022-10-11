@@ -6,12 +6,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
-    <color name="orangelight">#FF9800</color>
+    <color name="orangelight">#CA7800</color>
     <color name="orangedark">#9A5C00</color>
     <color name="greylight">#A1A1A1</color>
     <color name="greydark">#707070</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#E20F00</color>
 
 
 </resources>

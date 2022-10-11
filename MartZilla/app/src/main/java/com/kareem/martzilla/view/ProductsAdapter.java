@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
 
-    private ArrayList<Products> productsList;
+    private List<Products> productsList = new ArrayList<>();
     private ProductItemTapInterface productItemTapInterface;
 
     public ProductsAdapter(List<Products> productsList, ProductItemTapInterface productItemTapInterface) {
@@ -32,12 +33,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView productImage;
+        ImageView productImage;
         TextView productName;
         TextView productCategory;
         LinearLayout productData;
         ImageView cartIcon;
         ImageView favIcon;
+        TextView price;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +50,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             productData = itemView.findViewById(R.id.productdata);
             cartIcon = itemView.findViewById(R.id.addtocartbutton);
             favIcon = itemView.findViewById(R.id.favoritebutton);
+            price = itemView.findViewById(R.id.productprice);
         }
     }
 
@@ -67,6 +70,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         Glide.with(holder.productImage.getContext())
                 .load(productsList.get(position).getImage())
                 .into(holder.productImage);
+        holder.price.setText(String.format("$%.2f", currentProduct.getPrice()));
+
+        if (currentProduct.isSaved()){
+            holder.favIcon.setImageResource(R.drawable.ic_baseline_bookmark_24);
+        }
+        else {
+            holder.favIcon.setImageResource(R.drawable.ic_baseline_bookmark_border_24);
+        }
 
         holder.productImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +101,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 productItemTapInterface.favTap(currentProduct);
-//                if (productItemTapInterface.favTap(currentProduct)){
-//                    holder.favIcon.setImageResource(R.drawable.ic_baseline_favorite_24);
-//                }
-//                else {
-//                    holder.favIcon.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-//                }
             }
         });
     }

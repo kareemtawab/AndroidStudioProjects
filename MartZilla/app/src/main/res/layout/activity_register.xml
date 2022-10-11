@@ -9,6 +9,19 @@
 
     <ImageView
         android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10sp"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        android:alpha="0.7"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bkg"
         android:scaleType="centerCrop"
@@ -143,7 +156,7 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:fontFamily="@font/intertight_bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginStart="25sp"
             android:layout_marginEnd="25sp"
             android:layout_marginTop="20sp"
@@ -197,14 +210,5 @@
         android:layout_alignParentBottom="true"
         app:tint="@color/orangedark"
         />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="15sp"
-        android:src="@drawable/shadow"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
-        app:tint="@color/orangedark"
-        android:rotation="180"
-        />
+
 </RelativeLayout>

@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".controller.GetStartedActivity"
     >
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10sp"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        android:alpha="0.7"
+        />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -63,13 +74,44 @@
         android:id="@+id/welcometoourstore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to\nour store!"
+        android:text="Hi there!\n Welcome to our store!"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:fontFamily="@font/intertight_extrabold"
+        android:textSize="40sp"
+        android:lineSpacingMultiplier="0.8"
+        android:layout_marginBottom="-5sp"
+        android:layout_above="@id/quote"
+        />
+
+    <TextView
+        android:id="@+id/quote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Whoever said money can't buy happiness didn't know where to shop!"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:fontFamily="@font/intertight_light"
-        android:textSize="50sp"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="0.9"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="-5sp"
+        android:layout_above="@id/poet"
+        />
+    <TextView
+        android:id="@+id/poet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-Gertrude Stein"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:fontFamily="@font/intertight_bolditalic"
+        android:textSize="15sp"
         android:lineSpacingMultiplier="0.7"
         android:layout_marginBottom="-20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
         android:layout_above="@id/getstartedbutton"
         />
 
@@ -82,9 +124,10 @@
         android:layout_marginTop="25sp"
         android:layout_marginEnd="25sp"
         android:layout_marginBottom="25sp"
-        android:text="Let's get Started!"
-        android:fontFamily="@font/intertight_bold"
-        android:textColor="@color/black" />
+        android:text="Live the experience Now!"
+        android:textSize="20sp"
+        android:fontFamily="@font/intertight_black"
+        android:textColor="@color/white" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,15 +136,5 @@
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
         app:tint="@color/orangedark"
-        />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="15sp"
-        android:src="@drawable/shadow"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
-        app:tint="@color/orangedark"
-        android:rotation="180"
         />
 </RelativeLayout>

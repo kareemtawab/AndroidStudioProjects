@@ -22,7 +22,10 @@
                 android:textColor="@color/orangedark"
                 android:textStyle="bold"
                 android:textSize="15sp"
-                android:layout_margin="15sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="5sp"
                 android:textAllCaps="true"
                 />
     </androidx.cardview.widget.CardView>

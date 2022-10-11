@@ -3,7 +3,6 @@ package com.kareem.lodatask.model;
 import java.util.ArrayList;
 
 public class Products {
-
     private int id;
     private String title;
     private String description;

@@ -6,39 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".controller.SingleProductActivity">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/bkg"
         android:scaleType="centerCrop"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400sp"
+        android:layout_height="450sp"
         android:id="@+id/picturelayout"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10sp"
         >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="30sp"
+            android:src="@drawable/shadow"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            app:tint="@color/orangedark"
+            android:rotation="180"
+            android:alpha="0.7"
+            />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="30sp"
-            app:cardCornerRadius="80sp"
-            android:layout_marginStart="50sp"
-            android:layout_marginEnd="-80sp"
-            android:layout_marginTop="-80sp"
+            app:cardCornerRadius="20sp"
+            android:layout_margin="15sp"
             android:layout_marginBottom="10sp"
+            app:cardBackgroundColor="@color/white"
 
             >
-            <ImageView
-            android:id="@+id/productpic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/err"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="false"
-            android:elevation="30sp"
-            />
+                <ImageView
+                android:id="@+id/productpic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/err"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="false"
+                android:elevation="30sp"
+                />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <RelativeLayout
@@ -73,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product Category"
+                android:textAllCaps="true"
                 android:fontFamily="@font/intertight_bold"
                 android:textColor="@color/greydark"
                 android:textSize="15sp"
@@ -159,6 +172,7 @@
                 android:fontFamily="@font/intertight_bold"
                 android:gravity="center"
                 android:hint="1"
+                android:inputType="number"
                 android:textAlignment="center"
                 android:textColor="@color/orangedark"
                 android:textColorHint="@color/greydark"
@@ -234,7 +248,7 @@
         android:layout_height="wrap_content"
         android:text="Add to Cart"
         android:fontFamily="@font/intertight_bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="25sp"
         android:layout_marginEnd="25sp"
@@ -248,8 +262,8 @@
         android:layout_alignStart="@id/backbutton"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25sp"
-        android:layout_marginTop="25sp"
+        android:layout_marginStart="35sp"
+        android:layout_marginTop="35sp"
         android:layout_marginEnd="25sp"
         android:layout_marginBottom="25sp"
         android:elevation="15sp"
@@ -263,10 +277,11 @@
         android:scaleType="centerCrop"
         android:elevation="15sp"
         app:tint="@color/white"
-        android:layout_margin="30sp"
+        android:layout_margin="40sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         />
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -277,5 +292,6 @@
         android:layout_alignParentBottom="true"
         app:tint="@color/orangedark"
         />
+
 </RelativeLayout>
 

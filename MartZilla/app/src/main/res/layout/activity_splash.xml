@@ -7,34 +7,47 @@
     android:orientation="vertical"
     tools:context=".controller.SplashActivity">
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:src="@drawable/shadow"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10sp"
+        app:tint="@color/orangedark"
+        android:rotation="180"
+        android:alpha="0.7"
+        />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:src="@drawable/bkg_splash"
         android:scaleType="centerCrop"
         />
+
     <LinearLayout
         android:id="@+id/martzillabrand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_centerInParent="true"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="100sp"
             android:layout_height="100sp"
-            android:src="@drawable/avocado"
-            android:scaleType="centerCrop"
             android:layout_marginBottom="10sp"
-            />
+            android:scaleType="centerCrop"
+            android:src="@drawable/avocado" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intertight_bold"
             android:text="Martzilla"
             android:textColor="@color/white"
-            android:fontFamily="@font/intertight_bold"
-            android:textSize="65sp"
-            />
+            android:textSize="65sp" />
     </LinearLayout>
     <ImageView
         android:id="@+id/underline"
@@ -63,14 +76,5 @@
         android:layout_alignParentBottom="true"
         app:tint="@color/orangedark"
         />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="15sp"
-        android:src="@drawable/shadow"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
-        app:tint="@color/orangedark"
-        android:rotation="180"
-        />
+
 </RelativeLayout>
