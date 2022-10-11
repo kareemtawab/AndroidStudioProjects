@@ -1,5 +1,5 @@
 # MartZilla Project Insights
-*(an E-Commerce Market Application by Kareem A. Tawab)*  
+*an E-Commerce Market Application by Kareem A. Tawab*  
 
 <img src="https://user-images.githubusercontent.com/24245215/195145257-66878426-7687-4025-ada2-414ce3406aa5.png" width="200">
 
@@ -55,7 +55,6 @@ This project idea was kindly provided and supervised on by **AMIT and Orange™ 
 <img src="https://user-images.githubusercontent.com/24245215/195138306-271ea2d2-50de-4f22-9ad4-5ca241c62ebe.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195138333-6189ffba-32e6-4b23-ab14-856f9d27532f.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195138386-744455b0-da9f-41ae-8879-b0f6d18ba866.jpg" width="200">
-<img src="https://user-images.githubusercontent.com/24245215/195138441-2f8f61a4-013d-4ec2-b7fe-ccd7a4b611e0.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195138441-2f8f61a4-013d-4ec2-b7fe-ccd7a4b611e0.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195138513-88565199-7f4e-4e94-9b77-66f6c34f5548.jpg" width="200">
 <img src="https://user-images.githubusercontent.com/24245215/195138628-25118102-13ee-4a9a-bc7a-72b794c8f486.jpg" width="200">
