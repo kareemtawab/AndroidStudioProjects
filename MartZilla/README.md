@@ -1,6 +1,6 @@
 # MartZilla Project Insights
 <img src="https://user-images.githubusercontent.com/24245215/195145257-66878426-7687-4025-ada2-414ce3406aa5.png" width="200">
-(an E-Commerce Market Application by Kareem A. Tawab)
+(an E-Commerce Market Application by Kareem A. Tawab)  
 
 This project idea was kindly provided and supervised on by **AMIT and Orange™ Digital Center** during the online "Java + Android" course. It comprises of a simple application that provides an imagination of how an e-commerce application can be effective in upscaling the users' experience and uplifting a company's goals while being provided in an eye-popping look. The story behind its name came from the words "mart" that denotes an online shop and "zilla" that comes from the 1954 movie of _Godzilla_ where it implies some form of excess and mightiness. So, it had to be named **MartZilla**.
 
