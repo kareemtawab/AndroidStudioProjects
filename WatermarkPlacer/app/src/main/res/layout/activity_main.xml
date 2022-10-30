@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bkg"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/shadow"
+        android:rotation="180"
+        android:alpha="0.5"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/logo"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:elevation="15sp"
+        android:src="@drawable/icon"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2sp"
+        app:civ_circle_background_color="@color/black"
+        android:layout_marginTop="15sp"
+        android:layout_marginStart="15sp"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="15sp"
+        android:text="Kareem's\nWatermark Placer"
+        android:layout_centerVertical="true"
+        android:lineSpacingMultiplier="0.75"
+        android:fontFamily="@font/intertight_black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_toEndOf="@id/logo"
+        />
+
+    <TextView
+        android:id="@+id/hash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#3dpguru"
+        android:fontFamily="@font/intertight_black"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="15sp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_alignParentEnd="true"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/logo"
+        app:cardCornerRadius="30sp"
+        android:layout_margin="20sp"
+        app:cardBackgroundColor="@color/grey"
+        android:elevation="10sp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bkg2_transparent"
+            />
+        <LinearLayout
+            android:id="@+id/nomedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="10sp"
+            android:layout_gravity="center"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/invalid"
+                android:layout_gravity="center"
+                app:tint="@color/white" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Media\nLoaded!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/intertight_black"
+                android:lineSpacingMultiplier="0.75"
+                android:textSize="50sp"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/photopreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+        <VideoView
+            android:id="@+id/videopreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
+            android:id="@+id/loadbuttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+            <Button
+                android:id="@+id/capturebutton"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:layout_marginEnd="10sp"
+                android:text="Capture Photo"
+                android:fontFamily="@font/intertight_black"
+                android:textColor="@color/white"
+                />
+
+            <Button
+                android:id="@+id/loadphotobutton"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10sp"
+                android:text="Load Photo"
+                android:fontFamily="@font/intertight_black"
+                android:textColor="@color/white"
+                />
+
+            <Button
+                android:id="@+id/loadvideobutton"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25sp"
+                android:text="Load Video"
+                android:fontFamily="@font/intertight_black"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/savemediabutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginBottom="25sp"
+            android:text="Save to Internal Storage"
+            android:fontFamily="@font/intertight_black"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25sp"
+        android:visibility="invisible"
+        />
+</RelativeLayout>

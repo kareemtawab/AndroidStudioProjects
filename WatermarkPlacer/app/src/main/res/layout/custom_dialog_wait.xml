@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="30sp"
+        android:elevation="15sp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15sp"
+        app:cardElevation="20sp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15sp"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Please wait\nwhile video being rendered"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/intertight_bold"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/progressstats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="Progress: 0%"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/intertight_bold"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/abort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5sp"
+                        android:text="Abort"
+                        android:fontFamily="@font/intertight_bold"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
+        </RelativeLayout>
+     </androidx.cardview.widget.CardView>
+</RelativeLayout>
