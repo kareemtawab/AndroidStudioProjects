@@ -1,6 +1,5 @@
 package com.kareem.watermarkplacer;
 
-import static android.media.MediaMetadataRetriever.METADATA_KEY_DURATION;
 import static android.media.MediaMetadataRetriever.METADATA_KEY_VIDEO_FRAME_COUNT;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -24,7 +23,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.FileUtils;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -42,7 +40,10 @@ import android.widget.VideoView;
 import com.arthenica.ffmpegkit.FFmpegKit;
 import com.arthenica.ffmpegkit.FFmpegKitConfig;
 import com.arthenica.ffmpegkit.FFmpegSession;
+import com.arthenica.ffmpegkit.FFmpegSessionCompleteCallback;
+import com.arthenica.ffmpegkit.LogCallback;
 import com.arthenica.ffmpegkit.ReturnCode;
+import com.arthenica.ffmpegkit.SessionState;
 import com.arthenica.ffmpegkit.Statistics;
 import com.arthenica.ffmpegkit.StatisticsCallback;
 //import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
@@ -52,10 +53,10 @@ import com.arthenica.ffmpegkit.StatisticsCallback;
 //import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int OUT_VIDEO_HEIGHT = 640;
     private int mediaType = 0;
     private int renderProgress = 0;
+    private boolean cancelAllRenders = false;
 
     LinearLayout noMediaLayout;
     ImageView imageView;
@@ -75,12 +77,19 @@ public class MainActivity extends AppCompatActivity {
     VideoView videoView;
     ProgressBar loadingCircle;
     Dialog waitDialog;
+    TextView progress;
 
     Bitmap imagewithwatermarkHW;
-    Uri rawVideoUri;
+    Uri videoRawUri;
+    Uri videoEndingFromResourcesUri;
+    Uri videoEndingReadyForRenderUri;
     Uri videoWithWatermarkUri;
+    Uri videoFinalUri;
     Uri watermarkUri;
     File filesDir;
+
+    int endingVideoWidth, endingVideoHeight, outVideoWidth, outVideoHeight;
+    FFmpegSession endingVideoRender, mainVideoRender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                              Path src = null;
                              Path dest = null;
                              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                 src = Paths.get(videoWithWatermarkUri.getPath());
+                                 src = Paths.get(videoFinalUri.getPath());
                                  dest = Paths.get(file.getAbsolutePath() + "/WP_" + System.currentTimeMillis() + ".mp4");
                                  try {
                                      Files.copy(src, dest);
@@ -228,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             Canvas canvas = new Canvas(imagewithwatermarkHW);
             canvas.drawBitmap(imageHW, 0, 0, null);
 
-            Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.guru_watermark);
+            Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.tiktok_watermark);
             if (image.getWidth() >= image.getHeight()){
                 waterMark = Bitmap.createScaledBitmap(waterMark, image.getHeight() / 4, image.getHeight() / 4, false);
             }
@@ -262,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.guru_watermark);
+            Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.tiktok_watermark);
             if (image.getWidth() >= image.getHeight()){
                 waterMark = Bitmap.createScaledBitmap(waterMark, image.getHeight() / 4, image.getHeight() / 4, false);
             }
@@ -291,12 +300,12 @@ public class MainActivity extends AppCompatActivity {
             waitDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             waitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             waitDialog.show();
-            TextView progress = waitDialog.findViewById(R.id.progressstats);
+            progress = waitDialog.findViewById(R.id.progressstats);
             Button stopExec = waitDialog.findViewById(R.id.abort);
             stopExec.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FFmpegKit.cancel();
+                    cancelAllRenders = true;
                     waitDialog.cancel();
                     renderProgress = 0;
                     noMediaLayout.setVisibility(View.VISIBLE);
@@ -314,22 +323,35 @@ public class MainActivity extends AppCompatActivity {
                     FileOutputStream fileOutputStream = null;
 
                     // get videos' uri
-                    rawVideoUri = data.getData();
+                    videoRawUri = data.getData();
+
+                    extractRawResource(R.raw.ending, filesDir.getAbsolutePath(), "endingRaw.mp4");
+                    videoEndingFromResourcesUri = Uri.parse(filesDir.getAbsolutePath() + "/endingRaw.mp4");
+                    videoEndingReadyForRenderUri = Uri.parse(filesDir.getAbsolutePath() + "/endingFinal.mp4");
+
                     videoWithWatermarkUri = Uri.parse(filesDir.getAbsolutePath() + "/temp.mp4");
 
+                    videoFinalUri = Uri.parse(filesDir.getAbsolutePath() + "/final.mp4");
+
                     // get watermark size with respect to the raw video aspect ratio and save it as png file in app data folder and get uri
-                    Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.guru_watermark);
+                    Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.tiktok_watermark);
 
                     MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
-                    metaRetriever.setDataSource(MainActivity.this, rawVideoUri);
+                    metaRetriever.setDataSource(MainActivity.this, videoRawUri);
 
-                    Bitmap bmp = metaRetriever.getFrameAtTime(0);
-                    int rawVideoWidth = bmp.getWidth();
-                    int rawVideoHeight = bmp.getHeight();
+                    int rawVideoHeight = metaRetriever.getFrameAtTime(0).getHeight();
+                    int rawVideoWidth = metaRetriever.getFrameAtTime(0).getWidth();
                     Log.e(TAG, "Raw video dimensions: " + rawVideoWidth + "x" + rawVideoHeight);
 
-                    int outVideoWidth = (int)((float)rawVideoWidth / (float)rawVideoHeight * (float)OUT_VIDEO_HEIGHT);
-                    int outVideoHeight = OUT_VIDEO_HEIGHT;
+                    metaRetriever.setDataSource(MainActivity.this, videoEndingFromResourcesUri);
+
+                    endingVideoHeight = metaRetriever.getFrameAtTime(0).getHeight();
+                    endingVideoWidth = metaRetriever.getFrameAtTime(0).getWidth();
+                    Log.e(TAG, "Ending video dimensions: " + endingVideoWidth + "x" + endingVideoHeight);
+
+                    outVideoWidth = (int)((float)rawVideoWidth / (float)rawVideoHeight * (float)OUT_VIDEO_HEIGHT);
+                    outVideoHeight = OUT_VIDEO_HEIGHT;
+
                     if (rawVideoWidth >= rawVideoHeight){
                         waterMark = Bitmap.createScaledBitmap(waterMark, outVideoHeight / 4, outVideoHeight / 4, false);
                     }
@@ -348,61 +370,8 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    // get render FFmpeg progress
-                    FFmpegKitConfig.enableStatisticsCallback(new StatisticsCallback() {
-                        @Override
-                        public void apply(final Statistics newStatistics) {
-                            renderProgress = 100 * newStatistics.getVideoFrameNumber() / Integer.parseInt(metaRetriever.extractMetadata(METADATA_KEY_VIDEO_FRAME_COUNT));
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress.setText(String.format("Progress: %d%%", renderProgress));
-                            }
-                        });
-                        }
-                    });
-
-                    // get ffmpeg argumented command
-                    String ffmpegCommand = "-y"
-                            + " -i " + FFmpegKitConfig.getSafParameterForRead(MainActivity.this, rawVideoUri)
-                            + " -i " + watermarkUri.getPath()
-//                            + " -filter_complex \"[0:v]scale=-1:" + OUT_VIDEO_HEIGHT + "[bg];[bg][1:v]overlay=0:0\""
-//                            + " -filter_complex \"[0:v]scale=-1:" + OUT_VIDEO_HEIGHT + "[bg];[bg][1:v]overlay=" + (outVideoWidth - 10 - waterMark.getWidth()) + ":" + (outVideoHeight - 10 - waterMark.getHeight()) + "\""
-                            + " -filter_complex \"[0:v]scale=-1:" + OUT_VIDEO_HEIGHT + "[bg];[bg][1:v]overlay=x='if(lt(mod(t\\,20)\\,10)\\,W-w-W*2/100\\,W*2/100)':y='if(lt(mod(t+5\\,20)\\,10)\\,H-h-H*2/100\\,H*2/100)'\""
-                            + " -preset ultrafast "
-                            + filesDir.getAbsolutePath() + "/temp.mp4";
-                    Log.e(TAG, "FFMPEG Command: " + ffmpegCommand);
-
-                    // run ffmpeg command
-                    FFmpegSession session1 = FFmpegKit.execute(ffmpegCommand);
-                    if (ReturnCode.isSuccess(session1.getReturnCode())) {
-                        waitDialog.cancel();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), "Successfully rendered video!", Toast.LENGTH_LONG).show();
-                                noMediaLayout.setVisibility(View.INVISIBLE);
-                                imageView.setVisibility(View.INVISIBLE);
-                                videoView.setVisibility(View.VISIBLE);
-
-                                MediaController mediaController = new MediaController(MainActivity.this);
-                                mediaController.setAnchorView(videoView);
-                                videoView.setMediaController(mediaController);
-
-                                videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        videoView.stopPlayback();
-                                        videoView.setVideoURI(videoWithWatermarkUri);
-                                        videoView.start();
-                                    }
-                                });
-                                videoView.setVideoURI(videoWithWatermarkUri);
-                                videoView.start();
-                            }
-                        });
-                        mediaType = 2;
-                    }
+                    // render process starts here
+                    renderMainVideoWithEnding();
                 }
             }).start();
         }
@@ -439,5 +408,232 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(this, "CAMERA PERMISSION GRANTED", Toast.LENGTH_LONG).show();
             return true;
         }
+    }
+
+    void renderMainVideoWithEnding(){
+
+        // get ffmpeg argumented command for preparing ending video
+        String ffmpegCommandForEndingVideo = "-y"
+                + " -i " + videoEndingFromResourcesUri.getPath() + " -r 30"
+                + " -vf \"scale=w=" + outVideoWidth + ":h=" + outVideoHeight
+                + ":force_original_aspect_ratio=1"
+                + ",pad="+ outVideoWidth + ":" + outVideoHeight + ":" + (outVideoWidth - (endingVideoWidth * outVideoWidth / outVideoHeight))/2 + ":" + outVideoHeight/2 + ":0x0E0E1A" + "\""
+                + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
+                + "-s " + outVideoWidth + "x" + outVideoHeight + " "
+                + filesDir.getAbsolutePath() + "/endingFinal.mp4";
+        Log.e(TAG, "FFMPEG Command for Ending Video: " + ffmpegCommandForEndingVideo);
+
+        // run ffmpeg command for ending video
+        endingVideoRender = FFmpegKit.executeAsync(ffmpegCommandForEndingVideo, new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                // CALLED WHEN SESSION IS EXECUTED
+                SessionState state = session.getState();
+                ReturnCode returnCode = session.getReturnCode();
+                Log.e(TAG, String.format("FFmpeg process exited with state %s and rc %s.%s", state, returnCode, session.getFailStackTrace()));
+            }
+        }, new LogCallback() {
+
+            @Override
+            public void apply(com.arthenica.ffmpegkit.Log log) {
+                // CALLED WHEN SESSION PRINTS LOGS
+                Log.i(TAG, "ffmpeg 1/3 log: " + log.getMessage());
+            }
+        }, new StatisticsCallback() {
+            @Override
+            public void apply(Statistics statistics) {
+                // CALLED WHEN SESSION GENERATES STATISTICS
+                MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+                metaRetriever.setDataSource(MainActivity.this, videoEndingFromResourcesUri);
+                renderProgress = 100 * statistics.getVideoFrameNumber() / Integer.parseInt(metaRetriever.extractMetadata(METADATA_KEY_VIDEO_FRAME_COUNT));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.setText(String.format("Task 1/3, Progress: %d%%", renderProgress));
+                    }
+                });
+            }
+        });
+
+        FFmpegKitConfig.enableFFmpegSessionCompleteCallback(new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                if (!cancelAllRenders){
+                    renderMainVideoFun();
+                }
+                else{
+                    cancelAllRenders = false;
+                }
+            }
+        });
+    }
+
+    void renderMainVideoFun(){
+
+        // get ffmpeg argumented command for preparing main video
+        String ffmpegCommand = "-y"
+                + " -i " + FFmpegKitConfig.getSafParameterForRead(MainActivity.this, videoRawUri) + " -r 30"
+                + " -i " + watermarkUri.getPath() + " -r 30"
+//                            + " -filter_complex \"[0:v]scale=-1:" + outVideoHeight + "[bg];[bg][1:v]overlay=0:0\""
+//                            + " -filter_complex \"[0:v]scale=-1:" + outVideoHeight + "[bg];[bg][1:v]overlay=" + (outVideoWidth - 10 - waterMark.getWidth()) + ":" + (outVideoHeight - 10 - waterMark.getHeight()) + "\""
+                + " -filter_complex \""
+                + "[0:v]scale=" + outVideoWidth + ":" + outVideoHeight + "[v0]; "
+                + "[v0][1:v]overlay=x='if(lt(mod(t\\,20)\\,10)\\,W-w-W*2/100\\,W*2/100)':y='if(lt(mod(t+5\\,20)\\,10)\\,H-h-H*2/100\\,H*2/100)'"
+                + "\""
+                + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
+                + "-s " + outVideoWidth + "x" + outVideoHeight + " "
+                + filesDir.getAbsolutePath() + "/temp.mp4";
+        Log.e(TAG, "FFMPEG Command: " + ffmpegCommand);
+
+        // run ffmpeg command for main video
+        mainVideoRender = FFmpegKit.executeAsync(ffmpegCommand, new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                // CALLED WHEN SESSION IS EXECUTED
+                SessionState state = session.getState();
+                ReturnCode returnCode = session.getReturnCode();
+                Log.e(TAG, String.format("FFmpeg process exited with state %s and rc %s.%s", state, returnCode, session.getFailStackTrace()));
+            }
+        }, new LogCallback() {
+
+            @Override
+            public void apply(com.arthenica.ffmpegkit.Log log) {
+                // CALLED WHEN SESSION PRINTS LOGS
+                Log.i(TAG, "ffmpeg 2/3 log: " + log.getMessage());
+            }
+        }, new StatisticsCallback() {
+
+            @Override
+            public void apply(Statistics statistics) {
+                // CALLED WHEN SESSION GENERATES STATISTICS
+                MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+                metaRetriever.setDataSource(MainActivity.this, videoRawUri);
+                renderProgress = 100 * statistics.getVideoFrameNumber() / Integer.parseInt(metaRetriever.extractMetadata(METADATA_KEY_VIDEO_FRAME_COUNT));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.setText(String.format("Task 2/3, Progress: %d%%", renderProgress));
+                    }
+                });
+            }
+        });
+
+        FFmpegKitConfig.enableFFmpegSessionCompleteCallback(new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                if (!cancelAllRenders){
+                    concatVideos();
+                }
+                else{
+                    cancelAllRenders = false;
+                }
+            }
+        });
+    }
+
+    void concatVideos(){
+
+        // get ffmpeg argumented command for preparing final video
+        String ffmpegConcatCommand = "-y"
+                + " -i " + videoWithWatermarkUri.getPath() + " -r 30"
+                + " -i " + videoEndingReadyForRenderUri.getPath() + " -r 30"
+                + " -filter_complex concat=n=2:v=1:a=1"
+                + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
+                + "-s " + outVideoWidth + "x" + outVideoHeight + " "
+                + filesDir.getAbsolutePath() + "/final.mp4";
+        Log.e(TAG, "FFMPEG Concat Command: " + ffmpegConcatCommand);
+
+        // run ffmpeg command for main video
+        mainVideoRender = FFmpegKit.executeAsync(ffmpegConcatCommand, new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                // CALLED WHEN SESSION IS EXECUTED
+                SessionState state = session.getState();
+                ReturnCode returnCode = session.getReturnCode();
+                Log.e(TAG, String.format("FFmpeg process exited with state %s and rc %s.%s", state, returnCode, session.getFailStackTrace()));
+            }
+        }, new LogCallback() {
+
+            @Override
+            public void apply(com.arthenica.ffmpegkit.Log log) {
+                // CALLED WHEN SESSION PRINTS LOGS
+                Log.i(TAG, "ffmpeg 3/3 log: " + log.getMessage());
+            }
+        }, new StatisticsCallback() {
+
+            @Override
+            public void apply(Statistics statistics) {
+                // CALLED WHEN SESSION GENERATES STATISTICS
+                MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+                metaRetriever.setDataSource(MainActivity.this, videoWithWatermarkUri);
+                renderProgress = Integer.parseInt(metaRetriever.extractMetadata(METADATA_KEY_VIDEO_FRAME_COUNT));
+                metaRetriever.setDataSource(MainActivity.this, videoEndingReadyForRenderUri);
+                renderProgress += Integer.parseInt(metaRetriever.extractMetadata(METADATA_KEY_VIDEO_FRAME_COUNT));
+                renderProgress = 100 * statistics.getVideoFrameNumber() / renderProgress;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.setText(String.format("Task 3/3, Progress: %d%%", renderProgress));
+                    }
+                });
+            }
+        });
+
+        FFmpegKitConfig.enableFFmpegSessionCompleteCallback(new FFmpegSessionCompleteCallback() {
+            @Override
+            public void apply(FFmpegSession session) {
+                waitDialog.cancel();
+                cancelAllRenders = false;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Successfully rendered video!", Toast.LENGTH_LONG).show();
+                        noMediaLayout.setVisibility(View.INVISIBLE);
+                        imageView.setVisibility(View.INVISIBLE);
+                        videoView.setVisibility(View.VISIBLE);
+
+                        MediaController mediaController = new MediaController(MainActivity.this);
+                        mediaController.setAnchorView(videoView);
+                        videoView.setMediaController(mediaController);
+
+                        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                videoView.stopPlayback();
+                                videoView.setVideoURI(videoFinalUri);
+                                videoView.start();
+                            }
+                        });
+                        videoView.setVideoURI(videoFinalUri);
+                        videoView.start();
+                    }
+                });
+                mediaType = 2;
+            }
+        });
+    }
+
+    private void extractRawResource(int resourceId, String path, String resourceName){
+        String pathFinal = path + "/" + resourceName;
+        try{
+            InputStream in = getResources().openRawResource(resourceId);
+            FileOutputStream out = null;
+            out = new FileOutputStream(pathFinal);
+            byte[] buff = new byte[1024];
+            int read = 0;
+            try {
+                while ((read = in.read(buff)) > 0) {
+                    out.write(buff, 0, read);
+                }
+            } finally {
+                in.close();
+                out.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
