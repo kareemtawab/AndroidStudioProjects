@@ -6,6 +6,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     Dialog waitDialog;
     TextView progress;
 
-    Bitmap imagewithwatermarkHW;
+    Bitmap imageFromCamera, imageWithWatermarkHW;
     Uri videoRawUri;
     Uri videoEndingFromResourcesUri;
     Uri videoEndingReadyForRenderUri;
@@ -101,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
         // wake-lock
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        // create app data folder
+        filesDir = new File(String.valueOf(getFilesDir()));
+        filesDir.mkdir();
+
         noMediaLayout = findViewById(R.id.nomedia);
         imageView = findViewById(R.id.photopreview);
         videoView = findViewById(R.id.videopreview);
@@ -121,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
                 videoView.setVisibility(View.INVISIBLE);
                 mediaType = 0;
                 if (checkCameraPermissions()){
+                    // start default camera
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult (cameraIntent, CAPTURE_CODE);
-                };
+
+                }
             }
         });
 
@@ -165,57 +172,63 @@ public class MainActivity extends AppCompatActivity {
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/WP");
                 file.mkdir();
                 if (checkWriteStoragePermissions()){
+                    saveBtn.setEnabled(false);
+                    saveBtn.setText("Saving. Please Wait!");
+                    loadingCircle.setVisibility(View.VISIBLE);
                     switch (mediaType){
                         case 0: // no media
                             Toast.makeText(MainActivity.this, "No media loaded. Please load media!", Toast.LENGTH_LONG).show();
                             break;
                          case 1: // photo
-                             saveBtn.setEnabled(false);
-                             loadingCircle.setVisibility(View.VISIBLE);
                              new Thread(new Runnable() {
                                  @Override
                                  public void run() {
                                      try {
                                          FileOutputStream fileOutputStream = new FileOutputStream(file.getAbsolutePath() + "/WP_" + System.currentTimeMillis() + ".jpg");
-                                         imagewithwatermarkHW.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
+                                         imageWithWatermarkHW.compress(Bitmap.CompressFormat.PNG, 90, fileOutputStream);
                                          fileOutputStream.flush();
                                          fileOutputStream.close();
-                                         runOnUiThread(new Runnable() {
-                                             @Override
-                                             public void run() {
-                                                 Toast.makeText(MainActivity.this, "Photo saved!", Toast.LENGTH_LONG).show();
-                                                 saveBtn.setEnabled(true);
-                                                 loadingCircle.setVisibility(View.INVISIBLE);
-                                             }
-                                         });
                                      } catch (IOException e) {
                                          e.printStackTrace();
+                                     }
+                                     runOnUiThread(new Runnable() {
+                                         @Override
+                                         public void run() {
+                                             Toast.makeText(MainActivity.this, "Photo Saved to Gallery!", Toast.LENGTH_LONG).show();
+                                             saveBtn.setEnabled(true);
+                                             saveBtn.setText("Save to Internal Storage");
+                                             loadingCircle.setVisibility(View.INVISIBLE);
+                                         }
+                                     });
+                                 }
+                             }).start();
+                            break;
+                         case 2: // video
+                             new Thread(new Runnable() {
+                                 Path src = null;
+                                 Path dest = null;
+                                 @Override
+                                 public void run() {
+                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                         src = Paths.get(videoFinalUri.getPath());
+                                         dest = Paths.get(file.getAbsolutePath() + "/WP_" + System.currentTimeMillis() + ".mp4");
+                                         try {
+                                             Files.copy(src, dest);
+                                         } catch (IOException e) {
+                                             e.printStackTrace();
+                                         }
                                          runOnUiThread(new Runnable() {
                                              @Override
                                              public void run() {
-                                                 Toast.makeText(MainActivity.this, "Error saving file!", Toast.LENGTH_LONG).show();
+                                                 Toast.makeText(MainActivity.this, "Video Saved to Gallery!", Toast.LENGTH_LONG).show();
+                                                 saveBtn.setEnabled(true);
+                                                 saveBtn.setText("Save to Internal Storage");
+                                                 loadingCircle.setVisibility(View.INVISIBLE);
                                              }
                                          });
                                      }
                                  }
                              }).start();
-                            break;
-                         case 2: // video
-                             saveBtn.setEnabled(false);
-                             loadingCircle.setVisibility(View.VISIBLE);
-                             Path src = null;
-                             Path dest = null;
-                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                 src = Paths.get(videoFinalUri.getPath());
-                                 dest = Paths.get(file.getAbsolutePath() + "/WP_" + System.currentTimeMillis() + ".mp4");
-                                 try {
-                                     Files.copy(src, dest);
-                                 } catch (IOException e) {
-                                     e.printStackTrace();
-                                 }}
-                             Toast.makeText(MainActivity.this, "Video saved!", Toast.LENGTH_LONG).show();
-                             saveBtn.setEnabled(true);
-                             loadingCircle.setVisibility(View.INVISIBLE);
                              break;
                     }
                     sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
@@ -231,27 +244,30 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((data != null) && requestCode == CAPTURE_CODE) {
-            Bitmap image = (Bitmap) data.getExtras().get("data");
-            imagewithwatermarkHW = image.copy(Bitmap.Config.ARGB_8888, true);
-            Bitmap imageHW = image.copy(Bitmap.Config.ARGB_8888, true);
-            Canvas canvas = new Canvas(imagewithwatermarkHW);
+
+            imageFromCamera = (Bitmap) data.getExtras().get("data");
+
+            imageWithWatermarkHW = imageFromCamera.copy(Bitmap.Config.ARGB_8888, true);
+            Bitmap imageHW = imageFromCamera.copy(Bitmap.Config.ARGB_8888, true);
+            Canvas canvas = new Canvas(imageWithWatermarkHW);
             canvas.drawBitmap(imageHW, 0, 0, null);
 
             Bitmap waterMark = BitmapFactory.decodeResource(getResources(), R.drawable.tiktok_watermark);
-            if (image.getWidth() >= image.getHeight()){
-                waterMark = Bitmap.createScaledBitmap(waterMark, image.getHeight() / 4, image.getHeight() / 4, false);
+            if (imageFromCamera.getWidth() >= imageFromCamera.getHeight()){
+                waterMark = Bitmap.createScaledBitmap(waterMark, imageFromCamera.getHeight() / 4, imageFromCamera.getHeight() / 4, false);
             }
-            if (image.getWidth() < image.getHeight()){
-                waterMark = Bitmap.createScaledBitmap(waterMark, image.getWidth() / 4, image.getWidth() / 4, false);
+            if (imageFromCamera.getWidth() < imageFromCamera.getHeight()){
+                waterMark = Bitmap.createScaledBitmap(waterMark, imageFromCamera.getWidth() / 4, imageFromCamera.getWidth() / 4, false);
             }
-            int startX = (canvas.getWidth() - waterMark.getWidth()) - 50;
-            int startY = (canvas.getHeight() - waterMark.getHeight()) - 50;
+            int startX = (canvas.getWidth() - waterMark.getWidth()) - canvas.getWidth() / 50;
+            int startY = (canvas.getHeight() - waterMark.getHeight()) - canvas.getHeight() / 50;
             canvas.drawBitmap(waterMark,startX,startY,null);
 
             noMediaLayout.setVisibility(View.INVISIBLE);
             imageView.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.INVISIBLE);
-            imageView.setImageBitmap(imagewithwatermarkHW);
+            imageView.setImageBitmap(imageWithWatermarkHW);
+
             mediaType = 1;
         }
         if ((data != null) && requestCode == PICK_PHOTO_CODE) {
@@ -279,19 +295,19 @@ public class MainActivity extends AppCompatActivity {
                 waterMark = Bitmap.createScaledBitmap(waterMark, image.getWidth() / 4, image.getWidth() / 4, false);
             }
 
-            imagewithwatermarkHW = image.copy(Bitmap.Config.ARGB_8888, true);
+            imageWithWatermarkHW = image.copy(Bitmap.Config.ARGB_8888, true);
             Bitmap imageHW = image.copy(Bitmap.Config.ARGB_8888, true);
-            Canvas canvas = new Canvas(imagewithwatermarkHW);
+            Canvas canvas = new Canvas(imageWithWatermarkHW);
             canvas.drawBitmap(imageHW, 0, 0, null);
 
-            int startX = (canvas.getWidth() - waterMark.getWidth()) - 50;
-            int startY = (canvas.getHeight() - waterMark.getHeight()) - 50;
+            int startX = (canvas.getWidth() - waterMark.getWidth()) - canvas.getWidth() / 50;
+            int startY = (canvas.getHeight() - waterMark.getHeight()) - canvas.getHeight() / 50;
             canvas.drawBitmap(waterMark,startX,startY,null);
 
             noMediaLayout.setVisibility(View.INVISIBLE);
             imageView.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.INVISIBLE);
-            imageView.setImageBitmap(imagewithwatermarkHW);
+            imageView.setImageBitmap(imageWithWatermarkHW);
             mediaType = 1;
         }
         if ((data != null) && requestCode == PICK_VIDEO_CODE) {
@@ -317,9 +333,7 @@ public class MainActivity extends AppCompatActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    // create app data directory then create empty watermark file stream
-                    filesDir = new File(String.valueOf(getFilesDir()));
-                    filesDir.mkdir();
+                    // create empty watermark file stream
                     FileOutputStream fileOutputStream = null;
 
                     // get videos' uri
@@ -415,13 +429,15 @@ public class MainActivity extends AppCompatActivity {
         // get ffmpeg argumented command for preparing ending video
         String ffmpegCommandForEndingVideo = "-y"
                 + " -i " + videoEndingFromResourcesUri.getPath() + " -r 30"
-                + " -vf \"scale=w=" + outVideoWidth + ":h=" + outVideoHeight
-                + ":force_original_aspect_ratio=1"
-                + ",pad="+ outVideoWidth + ":" + outVideoHeight + ":" + (outVideoWidth - (endingVideoWidth * outVideoWidth / outVideoHeight))/2 + ":" + outVideoHeight/2 + ":0x0E0E1A" + "\""
+                + " -vf \""
+                + "scale=w=" + outVideoWidth + ":h=" + outVideoHeight + ":force_original_aspect_ratio=1, "
+                + "pad="+ outVideoWidth + ":" + outVideoHeight + ":" + (outVideoWidth - (endingVideoWidth * outVideoWidth / outVideoHeight))/2 + ":" + outVideoHeight/2 + ":0x0E0E1A, "
+                + "drawtext=fontfile=/system/fonts/Roboto-Italic.ttf:text='@3dpguru':fontcolor=white:fontsize=18:box=1:boxcolor=black@0.1:boxborderw=5:x=(w-text_w)/2-30:y=(h-text_h)/2+46"
+                + "\""
                 + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
                 + "-s " + outVideoWidth + "x" + outVideoHeight + " "
                 + filesDir.getAbsolutePath() + "/endingFinal.mp4";
-        Log.e(TAG, "FFMPEG Command for Ending Video: " + ffmpegCommandForEndingVideo);
+        Log.e(TAG, "ffmpeg 1/3 command: " + ffmpegCommandForEndingVideo);
 
         // run ffmpeg command for ending video
         endingVideoRender = FFmpegKit.executeAsync(ffmpegCommandForEndingVideo, new FFmpegSessionCompleteCallback() {
@@ -483,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
                 + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
                 + "-s " + outVideoWidth + "x" + outVideoHeight + " "
                 + filesDir.getAbsolutePath() + "/temp.mp4";
-        Log.e(TAG, "FFMPEG Command: " + ffmpegCommand);
+        Log.e(TAG, "ffmpeg 2/3 command: " + ffmpegCommand);
 
         // run ffmpeg command for main video
         mainVideoRender = FFmpegKit.executeAsync(ffmpegCommand, new FFmpegSessionCompleteCallback() {
@@ -541,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                 + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
                 + "-s " + outVideoWidth + "x" + outVideoHeight + " "
                 + filesDir.getAbsolutePath() + "/final.mp4";
-        Log.e(TAG, "FFMPEG Concat Command: " + ffmpegConcatCommand);
+        Log.e(TAG, "ffmpeg 3/3 command: " + ffmpegConcatCommand);
 
         // run ffmpeg command for main video
         mainVideoRender = FFmpegKit.executeAsync(ffmpegConcatCommand, new FFmpegSessionCompleteCallback() {

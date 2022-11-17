@@ -130,6 +130,18 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         >
+        <TextView
+            android:id="@+id/experimental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Camera feature is experimental!"
+            android:layout_gravity="center"
+            android:lineSpacingMultiplier="0.75"
+            android:fontFamily="@font/intertight_bold"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
         <LinearLayout
             android:id="@+id/loadbuttons"
             android:layout_width="match_parent"
