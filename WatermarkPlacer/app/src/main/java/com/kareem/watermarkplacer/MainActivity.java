@@ -6,7 +6,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -64,6 +63,12 @@ import java.nio.file.Paths;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int timeInSecsBetweenWatermarkShifts = 5;
+    private double visibleWatermarkShiftCycles = 2.5;
+    private long rawVideoDuration;
+    private int endingVideoWidth, endingVideoHeight, rawVideoWidth, rawVideoHeight, outVideoWidth, outVideoHeight;
+
+    private final static int defaultTimeInSecsBetweenWatermarkShifts = 5;
     private final static int CAPTURE_CODE = 19;
     private final static int PICK_PHOTO_CODE = 20;
     private final static int PICK_VIDEO_CODE = 21;
@@ -89,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     Uri watermarkUri;
     File filesDir;
 
-    int endingVideoWidth, endingVideoHeight, outVideoWidth, outVideoHeight;
     FFmpegSession endingVideoRender, mainVideoRender;
 
     @Override
@@ -353,8 +357,9 @@ public class MainActivity extends AppCompatActivity {
                     MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
                     metaRetriever.setDataSource(MainActivity.this, videoRawUri);
 
-                    int rawVideoHeight = metaRetriever.getFrameAtTime(0).getHeight();
-                    int rawVideoWidth = metaRetriever.getFrameAtTime(0).getWidth();
+                    rawVideoDuration = Long.parseLong(metaRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
+                    rawVideoHeight = metaRetriever.getFrameAtTime(0).getHeight();
+                    rawVideoWidth = metaRetriever.getFrameAtTime(0).getWidth();
                     Log.e(TAG, "Raw video dimensions: " + rawVideoWidth + "x" + rawVideoHeight);
 
                     metaRetriever.setDataSource(MainActivity.this, videoEndingFromResourcesUri);
@@ -384,8 +389,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    //calculate non-default watermark shift cycles time
+                    if (rawVideoDuration < timeInSecsBetweenWatermarkShifts * visibleWatermarkShiftCycles){
+                        timeInSecsBetweenWatermarkShifts = (int)((double)rawVideoDuration / visibleWatermarkShiftCycles);
+                    }
+                    else {
+                        timeInSecsBetweenWatermarkShifts = defaultTimeInSecsBetweenWatermarkShifts;
+                    }
                     // render process starts here
-                    renderMainVideoWithEnding();
+                    renderEndingVideoFun();
                 }
             }).start();
         }
@@ -424,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void renderMainVideoWithEnding(){
+    void renderEndingVideoFun(){
 
         // get ffmpeg argumented command for preparing ending video
         String ffmpegCommandForEndingVideo = "-y"
@@ -494,7 +506,7 @@ public class MainActivity extends AppCompatActivity {
 //                            + " -filter_complex \"[0:v]scale=-1:" + outVideoHeight + "[bg];[bg][1:v]overlay=" + (outVideoWidth - 10 - waterMark.getWidth()) + ":" + (outVideoHeight - 10 - waterMark.getHeight()) + "\""
                 + " -filter_complex \""
                 + "[0:v]scale=" + outVideoWidth + ":" + outVideoHeight + "[v0]; "
-                + "[v0][1:v]overlay=x='if(lt(mod(t\\,20)\\,10)\\,W-w-W*2/100\\,W*2/100)':y='if(lt(mod(t+5\\,20)\\,10)\\,H-h-H*2/100\\,H*2/100)'"
+                + "[v0][1:v]overlay=x='if(lt(mod(t,10)," + timeInSecsBetweenWatermarkShifts + "),10,W-w-W*2/100)':y='if(lt(mod(t,10)," + timeInSecsBetweenWatermarkShifts + "),10,H-h-H*2/100)'"
                 + "\""
                 + " -framerate 30 -b:v 512k -b:a 128k -vsync 2 "
                 + "-s " + outVideoWidth + "x" + outVideoHeight + " "
@@ -538,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void apply(FFmpegSession session) {
                 if (!cancelAllRenders){
-                    concatVideos();
+                    concatVideosFun();
                 }
                 else{
                     cancelAllRenders = false;
@@ -547,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void concatVideos(){
+    void concatVideosFun(){
 
         // get ffmpeg argumented command for preparing final video
         String ffmpegConcatCommand = "-y"
